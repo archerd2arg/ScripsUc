@@ -1,7 +1,7 @@
 class AITimerWnd extends UIScriptEx;
 //~ const MAX_GAME_TIME_MIN = 20;
 const TIMER_ID_COUNTDOWN=2025;
-const TIMER_ID_COUNTUP=2026;// Å¸ÀÌ¸Ó¾Æµğ ¼öÁ¤ ÇØÁà¾ß ÇÏÁö ¾Ê³ª ???
+const TIMER_ID_COUNTUP=2026;// íƒ€ì´ë¨¸ì•„ë”” ìˆ˜ì • í•´ì¤˜ì•¼ í•˜ì§€ ì•Šë‚˜ ???
 const TIMER_DELAY=1000;
 
 var WindowHandle Me,MEBtn;
@@ -56,7 +56,7 @@ function OnEvent(int Event_ID, string param)
 	}
 }
 
-//Ä«¿îÆ®°¡ ¶Ç ºÒ·ÈÀ»¶§ ±âÁ¸ÀÇ °ÍÀ» Á×¿©¾ß ÇÑ´Ù.
+//ì¹´ìš´íŠ¸ê°€ ë˜ ë¶ˆë ¸ì„ë•Œ ê¸°ì¡´ì˜ ê²ƒì„ ì£½ì—¬ì•¼ í•œë‹¤.
 
 function HandleAIController(string Param)
 {
@@ -65,13 +65,13 @@ function HandleAIController(string Param)
 	local int intTimerDelay;
 	
 	//Debug("How Param composed of :" @ Param);
-	ParseString(Param, "Param1", Param1);	//Ä«¿îÆ®´Ù¿îÀÎÁö ¾÷ÀÎÁö	
-	ParseString(Param, "Param2", Param2); //Ä«¿îÆ® ½ÃÀÛÇÏ´Â ºĞ?
-	ParseString(Param, "Param3", Param3); //Ä«¿îÆ® ½ÃÀÛÇÏ´Â ÃÊ
-	ParseString(Param, "Param4", Param4); //º¸¿©ÁÖ´Â ½ºÆ®¸µ
-	ParseString(Param, "Param5", Param5); //Ä«¿îÆ® Á¾·áµÇ´Â ºĞ?
-	ParseString(Param, "Param6", Param6); //Ä«¿îÆ® Á¾·áµÇ´Â ÃÊ
-	Parseint(Param, "EventID", EventID) ;   //ÀÌº¥Æ® ¾ÆÀÌµğ - ÀÌ ÀÌº¥Æ®¾ÆÀÌµğ·Î ½ÃÀÛ/Á¤Áö/ÀÏ½ÃÁßÁö/ÀÏ½ÃÁ¤Áö ÈÄ ´Ù½Ã ½ÃÀÛÀÎÁö ÆÇ´Ü
+	ParseString(Param, "Param1", Param1);	//ì¹´ìš´íŠ¸ë‹¤ìš´ì¸ì§€ ì—…ì¸ì§€	
+	ParseString(Param, "Param2", Param2); //ì¹´ìš´íŠ¸ ì‹œì‘í•˜ëŠ” ë¶„?
+	ParseString(Param, "Param3", Param3); //ì¹´ìš´íŠ¸ ì‹œì‘í•˜ëŠ” ì´ˆ
+	ParseString(Param, "Param4", Param4); //ë³´ì—¬ì£¼ëŠ” ìŠ¤íŠ¸ë§
+	ParseString(Param, "Param5", Param5); //ì¹´ìš´íŠ¸ ì¢…ë£Œë˜ëŠ” ë¶„?
+	ParseString(Param, "Param6", Param6); //ì¹´ìš´íŠ¸ ì¢…ë£Œë˜ëŠ” ì´ˆ
+	Parseint(Param, "EventID", EventID) ;   //ì´ë²¤íŠ¸ ì•„ì´ë”” - ì´ ì´ë²¤íŠ¸ì•„ì´ë””ë¡œ ì‹œì‘/ì •ì§€/ì¼ì‹œì¤‘ì§€/ì¼ì‹œì •ì§€ í›„ ë‹¤ì‹œ ì‹œì‘ì¸ì§€ íŒë‹¨
 
 	Min = 0;
 	Sec = 0;
@@ -95,7 +95,7 @@ function HandleAIController(string Param)
 			break;
 		}
 	}
-	else if (EventID == 1) // Á¤Áö
+	else if (EventID == 1) // ì •ì§€
 	{
 		switch (Param1)
 		{
@@ -120,7 +120,7 @@ function HandleAIController(string Param)
 		
 	
 	}
-	else if (EventID == 2) // ÀÏ½Ã ÁßÁö
+	else if (EventID == 2) // ì¼ì‹œ ì¤‘ì§€
 	{
 
 		TempMin = Min ;
@@ -130,7 +130,7 @@ function HandleAIController(string Param)
 				
 	}
 	
-	else if (EventID == 3) // ÀÏ½Ã ÁßÁö ÈÄ ´Ù½Ã ½ÃÀÛ
+	else if (EventID == 3) // ì¼ì‹œ ì¤‘ì§€ í›„ ë‹¤ì‹œ ì‹œì‘
 	{
 		switch (Param1)
 		{
@@ -168,7 +168,7 @@ function HandleAIController(string Param)
 	}
 }
 
-/*function LaunchTimer(string TimerID,string strDisplayTxt)      //½Ã°£ ÃÊ±âÈ­ ÇÏ°í ¼ÂÇØÁÖ´Â °Í
+/*function LaunchTimer(string TimerID,string strDisplayTxt)      //ì‹œê°„ ì´ˆê¸°í™” í•˜ê³  ì…‹í•´ì£¼ëŠ” ê²ƒ
 {
 	if (TimerID == "0")
 	{
@@ -271,7 +271,7 @@ function OnTimer(int TimerID)
 	}
 }
 
-function UpdateTimerCountDown()   //½Ã°£À» Ä«¿îÆ® ´Ù¿î ¾÷µ¥ÀÌÆ® ½ÃÄÑÁØ´Ù
+function UpdateTimerCountDown()   //ì‹œê°„ì„ ì¹´ìš´íŠ¸ ë‹¤ìš´ ì—…ë°ì´íŠ¸ ì‹œì¼œì¤€ë‹¤
 {
 	MinStr = String(Min);
 	SecStr = String(Sec);
@@ -296,7 +296,7 @@ function UpdateTimerCountDown()   //½Ã°£À» Ä«¿îÆ® ´Ù¿î ¾÷µ¥ÀÌÆ® ½ÃÄÑÁØ´Ù
 	}
 }
 
-function UpdateTimerCountUp()   //½Ã°£À» Ä«¿îÅÍ ¾÷ ¾÷µ¥ÀÌÆ® ½ÃÄÑÁØ´Ù
+function UpdateTimerCountUp()   //ì‹œê°„ì„ ì¹´ìš´í„° ì—… ì—…ë°ì´íŠ¸ ì‹œì¼œì¤€ë‹¤
 {
 	MinStr = String(Min);
 	SecStr = String(Sec);
